@@ -1,0 +1,35 @@
+:last-update-label!:
+= Servo-Tester
+
+== pins
+
+[cols="1,2,2",grid=rows]
+|===
+| D2 | Servo auf 0° stellen | 
+| D3 | Servo auf -90° stellen | 
+| D4 | Servo auf 90° stellen | 
+| D5 | Manuel/Taster Modus toggeln | `LOW` = manueler-Modus
+| D7 | Servo 1 | 
+| D8 | Servo 2 | 
+| D9 | Servo 3 | 
+| D10 | Servo 4 | 
+| D12 | Error-LED | 
+| A0 | Potentiometer | 
+|===
+
+== poti-range
+
+[cols="2,2",grid=rows]
+|===
+| 0 to 444 | -90° to -1°
+| 445 to 578 | 0°
+| 579 to 1023| 1° to 90°
+|===
+
+== libraries
+
+* Adafruit GFX
+* Adafruit SSD1306
+* Adafruit BusIO
+* ESP8266WiFi 
+* ESP8266WiFiMulti
