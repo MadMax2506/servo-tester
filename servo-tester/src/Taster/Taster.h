@@ -20,19 +20,9 @@ class Taster {
   public:
     Taster(ServoGroup*);
 
-    /**
-     * @return the last which was pressed
-    */
-    String getLastTaster();
-
-    /**
-     * @param lastTaster which was pressed
-    */
     void setLastTaster(String);
-
-    /**
-     * check which taster is pressed an execute the command. Otherwise do nothing.
-    */
+    String getLastTaster();
+    
     void executeTasterCommand();
 };
 

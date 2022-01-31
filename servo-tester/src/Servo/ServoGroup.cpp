@@ -8,10 +8,17 @@ ServoGroup::ServoGroup(): currentDegree(0), oldDegree(0), numberOfActiveSertvos(
   servos[3] = new Servomotor(SERVO_FOUR);
 }
 
+/**
+ * @return the number of active servos 
+ */
 int ServoGroup::getNumberOfActiveServos() {
   return numberOfActiveSertvos;
 }
 
+/** 
+ * Read from all active servos
+ * @return an avg degree from all active servos
+*/
 int ServoGroup::read() {
   int degree = 0;
   
@@ -21,12 +28,20 @@ int ServoGroup::read() {
   return degree / numberOfActiveSertvos;
 }
 
+/**
+ * Write to all servos with check if it is a new degree.
+ * @param degree
+*/
 void ServoGroup::write(int degree) {
   if(isNewDegree()) {
     uncheckedWrite(degree);
   }
 }
 
+/**
+ * Write to all servos without check if it is a new degree.
+ * @param degree
+*/
 void ServoGroup::uncheckedWrite(int degree) {
   checkActiveServos();
 

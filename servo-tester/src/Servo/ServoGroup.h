@@ -26,27 +26,10 @@ class ServoGroup {
   public:
     ServoGroup();
 
-    /**
-     * @return the number of active servos 
-     */
     int getNumberOfActiveServos();
 
-    /** 
-     * Read from all active servos
-     * @return an avg degree from all active servos
-    */
     int read();
-
-    /**
-     * Write to all servos with check if it is a new degree.
-     * @param degree
-    */
     void write(int);
-    
-    /**
-     * Write to all servos without check if it is a new degree.
-     * @param degree
-    */
     void uncheckedWrite(int);
 };
 

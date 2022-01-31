@@ -13,20 +13,11 @@ class Servomotor {
   private:
     const int pin;
 
-    bool isAcive();
+    bool isActive();
   public:
     Servomotor(int);
 
-    /** 
-     * read from servo if servo is active
-     * @return degree value from servo
-    */
     int read();
-    
-    /** 
-     * write degree value to servo
-     * @param degree
-    */
     void write(int);
 };
 
