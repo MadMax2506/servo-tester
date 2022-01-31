@@ -2,7 +2,7 @@
 #define _TASTER_H_
 
 #include <Arduino.h>
-#include "../Servos/Servos.h"
+#include "../Servo/ServoGroup.h"
 
 #define ZERO_DEGREE_PIN 2
 #define EDGE_VALUE_LOW_PIN 3
@@ -16,13 +16,23 @@
 class Taster {
   private:
     String lastTaster;
-    Servos* servos;
+    ServoGroup* servoGroup;
   public:
-    Taster(Servos* servos): lastTaster(TASTER_EMPTY), servos(servos) {}
+    Taster(ServoGroup*);
 
+    /**
+     * @return the last which was pressed
+    */
     String getLastTaster();
+
+    /**
+     * @param lastTaster which was pressed
+    */
     void setLastTaster(String);
 
+    /**
+     * check which taster is pressed an execute the command. Otherwise do nothing.
+    */
     void executeTasterCommand();
 };
 

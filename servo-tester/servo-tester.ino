@@ -3,16 +3,14 @@
 #include <Adafruit_SSD1306.h>
 #include "src/Utils/Utils.h"
 #include "src/Taster/Taster.h"
-#include "src/Servos/Servos.h"
+#include "src/Servo/ServoGroup.h"
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-Servos* servos;
+ServoGroup* servoGroup;
 Taster* taster;
 
 void setup() {
-  Serial.begin(9600);
-
   // define pins
   pinMode(ZERO_DEGREE_PIN, INPUT_PULLUP);
   pinMode(EDGE_VALUE_LOW_PIN, INPUT_PULLUP);
@@ -21,8 +19,7 @@ void setup() {
   pinMode(ERROR_LED_PIN, OUTPUT);
 
   // dispaly
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { 
-    Serial.println("SSD1306 allocation failed");
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     setError();
     for(;;);
   }
@@ -31,19 +28,19 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE);
 
-  servos = new Servos();
-  taster = new Taster(servos);
+  servoGroup = new ServoGroup();
+  taster = new Taster(servoGroup);
 }
 
 void loop() {
   const bool manuelModus = isManuelModus();
-
+  
   display.setCursor(0, 0);
   display.clearDisplay();
   display.print("Modus: ");
   if(manuelModus) {
     const int degree = getDegreeFromPoti();
-    servos->write(degree);
+    servoGroup->write(degree);
 
     // display
     display.println(MANUEL_MODUS);
