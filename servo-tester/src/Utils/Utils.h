@@ -11,9 +11,7 @@
 #define MANUEL_MODUS "Manuel"
 #define TASTER_MODUS "Taster"
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 32
-
+void definePinModes();
 void setError();
 bool isManuelModus();
 int getDegreeFromPoti();
