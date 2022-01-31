@@ -1,42 +1,31 @@
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
 #include "src/Utils/Utils.h"
 #include "src/Taster/Taster.h"
 #include "src/Servo/ServoGroup.h"
-
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+#include "src/Display/Display.h"
 
 ServoGroup* servoGroup;
 Taster* taster;
+Display* display;
 
 void setup() {
   // define pins
-  pinMode(ZERO_DEGREE_PIN, INPUT_PULLUP);
-  pinMode(EDGE_VALUE_LOW_PIN, INPUT_PULLUP);
-  pinMode(EDGE_VALUE_HIGH_PIN, INPUT_PULLUP);
-  pinMode(TOOGLE_MODI_PIN, INPUT_PULLUP);
-  pinMode(ERROR_LED_PIN, OUTPUT);
+
+  display = new Display();
+  servoGroup = new ServoGroup();
+  taster = new Taster(servoGroup);
 
   // dispaly
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+  if(display->connect()) {
+    display->setup();
+  } else {
     setError();
     for(;;);
   }
-
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-
-  servoGroup = new ServoGroup();
-  taster = new Taster(servoGroup);
 }
 
 void loop() {
   const bool manuelModus = isManuelModus();
   
-  display.setCursor(0, 0);
-  display.clearDisplay();
   display.print("Modus: ");
   if(manuelModus) {
     const int degree = getDegreeFromPoti();
@@ -56,6 +45,6 @@ void loop() {
     display.println(taster->getLastTaster());
   }
 
-  display.display();
+  display->show();
   delay(200);
 }
