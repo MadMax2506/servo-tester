@@ -26,23 +26,19 @@ void setup() {
 void loop() {
   const bool manuelModus = isManuelModus();
   
-  display.print("Modus: ");
   if(manuelModus) {
     const int degree = getDegreeFromPoti();
     servoGroup->write(degree);
 
     // display
-    display.println(MANUEL_MODUS);
-    display.print("Grad: ");
-    display.println(degree);
+    display->setModus(MANUEL_MODUS);
+    display->setDegree(degree);
   } else {
     taster->executeTasterCommand();
 
     // display
-    display.println(TASTER_MODUS);
-    display.println("letzter Taster: ");
-    display.print(" ");
-    display.println(taster->getLastTaster());
+    display->setModus(TASTER_MODUS);
+    display->setLastTaster(taster->getLastTaster());
   }
 
   display->show();

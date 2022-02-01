@@ -21,6 +21,10 @@ class Display {
 
     bool connect();
     void setup();
+    
+    void setModus(String);
+    void setDegree(int);
+    void setLastTaster(String);
     void show();
 };
 

@@ -21,6 +21,31 @@ void Display::setup() {
 }
 
 /**
+ * @param modus which is displayed
+ */
+void Display::setModus(String modus) {
+  output->print("Modus: ");
+  output->println(modus);
+}
+
+/**
+ * @param degree which is displayed
+ */
+void Display::setDegree(int degree) {
+  output->print("Grad: ");
+  output->println(degree);
+}
+
+/**
+ * @param lastTaster which is displayed
+ */
+void Display::setLastTaster(String lastTaster) {
+  output->println("letzter Taster: ");
+  output->print(" ");
+  output->println(lastTaster);
+}
+
+/**
  * show the content on the display
  */
 void Display::show() {
