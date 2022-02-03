@@ -46,22 +46,34 @@ void Display::setLastTaster(String lastTaster) {
 }
 
 /**
+ * display a waiting text for the servo
+ */
+void Display::waitForServo() {
+  output->println("Keinen Servo an den");
+  output->print("Pins D");
+  output->print(SERVO_ONE);
+  output->print(", D");
+  output->print(SERVO_TWO);
+  output->print(", D");
+  output->print(SERVO_THREE);
+  output->println(" oder");
+  output->print("D");
+  output->print(SERVO_FOUR);
+  output->println(" angeschlossen");
+}
+
+/**
  * show the content on the display
  */
 void Display::show() {
   output->display();
 }
 
-// private //
-
 /**
  * delete complete content from the display and set cursor to the start
  * @param showChanges display the changes directly if value is true
  */
-void Display::reset(bool showChanges = false) {
+void Display::reset() {
   output->setCursor(0, 0);
   output->clearDisplay();
-  if(showChanges) {
-    output->display();
-  }
 }

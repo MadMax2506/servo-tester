@@ -5,6 +5,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "../Servo/ServoGroup.h"
 
 #define DISPLAY_WIDTH 128
 #define DISPLAY_HEIGHT 32
@@ -14,8 +15,6 @@ class Display {
   private:
     Adafruit_SSD1306* output;
     String text;
-
-    void reset(bool);
   public:
     Display();
 
@@ -25,7 +24,9 @@ class Display {
     void setModus(String);
     void setDegree(int);
     void setLastTaster(String);
+    void waitForServo();
     void show();
+    void reset();
 };
 
 #endif //_DISPLAY_H_

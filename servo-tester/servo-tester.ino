@@ -8,37 +8,45 @@ Taster* taster;
 Display* display;
 
 void setup() {
-  // define pins
+  definePinModes();
 
   display = new Display();
   servoGroup = new ServoGroup();
   taster = new Taster(servoGroup);
 
-  // dispaly
   if(display->connect()) {
     display->setup();
   } else {
-    setError();
+    setErrorLed();
     for(;;);
   }
 }
 
 void loop() {
-  const bool manuelModus = isManuelModus();
-  
-  if(manuelModus) {
-    const int degree = getDegreeFromPoti();
-    servoGroup->write(degree);
+  display->reset();
 
-    // display
-    display->setModus(MANUEL_MODUS);
-    display->setDegree(degree);
+  // check if any servo is connected
+  if(false) {
+    // any servo is connected
+    
+    // check if it is a manuel modus
+    if(checkIfManuelModus()) {
+      // manuel modus
+      const int degree = getDegreeFromPoti();
+      servoGroup->write(degree);
+
+      display->setModus(MANUEL_MODUS);
+      display->setDegree(degree);
+    } else {
+      // taster modus
+      taster->executeTasterCommand();
+
+      display->setModus(TASTER_MODUS);
+      display->setLastTaster(taster->getLastTaster());
+    } 
   } else {
-    taster->executeTasterCommand();
-
-    // display
-    display->setModus(TASTER_MODUS);
-    display->setLastTaster(taster->getLastTaster());
+    // no servo is connected
+    display->waitForServo();
   }
 
   display->show();

@@ -12,8 +12,8 @@
 #define TASTER_MODUS "Taster"
 
 void definePinModes();
-void setError();
-bool isManuelModus();
+void setErrorLed();
+bool checkIfManuelModus();
 int getDegreeFromPoti();
 
 #endif //_UTILS_H_

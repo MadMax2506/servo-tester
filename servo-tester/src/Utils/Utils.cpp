@@ -9,7 +9,7 @@ void definePinModes() {
   pinMode(ERROR_LED_PIN, OUTPUT);
 }
 
-bool isManuelModus() {
+bool checkIfManuelModus() {
   return digitalRead(TOOGLE_MODI_PIN) == LOW;
 }
 
@@ -24,6 +24,6 @@ int getDegreeFromPoti() {
   }
 }
 
-void setError() {
+void setErrorLed() {
   digitalWrite(ERROR_LED_PIN, HIGH);
 }
