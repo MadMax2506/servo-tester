@@ -8,6 +8,7 @@ Taster* taster;
 Display* display;
 
 void setup() {
+  Serial.begin(9600);
   definePinModes();
 
   display = new Display();
@@ -24,29 +25,21 @@ void setup() {
 
 void loop() {
   display->reset();
+  
+  // check if it is a manuel modus
+  if(checkIfManuelModus()) {
+    // manuel modus
+    const int degree = getDegreeFromPoti();
+    servoGroup->write(degree);
 
-  // check if any servo is connected
-  if(false) {
-    // any servo is connected
-    
-    // check if it is a manuel modus
-    if(checkIfManuelModus()) {
-      // manuel modus
-      const int degree = getDegreeFromPoti();
-      servoGroup->write(degree);
+    display->setModus(MANUEL_MODUS);
+    display->setDegree(degree);
+  } else { 
+    // taster modus
+    taster->executeTasterCommand();
 
-      display->setModus(MANUEL_MODUS);
-      display->setDegree(degree);
-    } else {
-      // taster modus
-      taster->executeTasterCommand();
-
-      display->setModus(TASTER_MODUS);
-      display->setLastTaster(taster->getLastTaster());
-    } 
-  } else {
-    // no servo is connected
-    display->waitForServo();
+    display->setModus(TASTER_MODUS);
+    display->setLastTaster(taster->getLastTaster());
   }
 
   display->show();

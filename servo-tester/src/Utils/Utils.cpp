@@ -24,6 +24,10 @@ int getDegreeFromPoti() {
   }
 }
 
+int convertDegreeForServo(int value) {
+  return value + 90;
+}
+
 void setErrorLed() {
   digitalWrite(ERROR_LED_PIN, HIGH);
 }

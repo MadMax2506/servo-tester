@@ -1,15 +1,7 @@
 #include "Servomotor.h"
 
-Servomotor::Servomotor(int pin): pin(pin) {
-  
-}
-
-/** 
- * read from servo if servo is active
- * @return degree value from servo
-*/
-int Servomotor::read() {
-  // TODO: read from servos
+Servomotor::Servomotor(int pin) : pin(pin) {
+  pinMode(pin, OUTPUT);
 }
 
 /** 
@@ -17,13 +9,10 @@ int Servomotor::read() {
  * @param degree
 */
 void Servomotor::write(int degree) {
-  if(isActive()) {
-
-  }
-}
-
-// private //
-
-bool Servomotor::isActive() {
-  return true;
+  // TODO: check code
+  int pwm = (convertDegreeForServo(degree) * 11) + 500;
+  digitalWrite(pin, HIGH);
+  delayMicroseconds(pwm);
+  digitalWrite(pin, LOW);
+  delay(50);
 }

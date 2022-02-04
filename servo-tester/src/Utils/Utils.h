@@ -15,5 +15,6 @@ void definePinModes();
 void setErrorLed();
 bool checkIfManuelModus();
 int getDegreeFromPoti();
+int convertDegreeForServo(int);
 
 #endif //_UTILS_H_

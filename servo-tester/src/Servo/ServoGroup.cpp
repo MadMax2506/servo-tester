@@ -1,6 +1,6 @@
 #include "ServoGroup.h"
 
-ServoGroup::ServoGroup(): currentDegree(0), oldDegree(0), numberOfActiveSertvos(0) {
+ServoGroup::ServoGroup(): currentDegree(0)  {
   // define servos
   servos[0] = new Servomotor(SERVO_ONE);
   servos[1] = new Servomotor(SERVO_TWO);
@@ -9,31 +9,12 @@ ServoGroup::ServoGroup(): currentDegree(0), oldDegree(0), numberOfActiveSertvos(
 }
 
 /**
- * @return the number of active servos 
- */
-int ServoGroup::getNumberOfActiveServos() {
-  return numberOfActiveSertvos;
-}
-
-/** 
- * Read from all active servos
- * @return an avg degree from all active servos
-*/
-int ServoGroup::read() {
-  int degree = 0;
-  
-  for(int i = 0; i < numberOfActiveSertvos; i++) {
-    degree+= servos[activeServoIndices[i]]->read();
-  }
-  return degree / numberOfActiveSertvos;
-}
-
-/**
  * Write to all servos with check if it is a new degree.
  * @param degree
 */
 void ServoGroup::write(int degree) {
-  if(isNewDegree()) {
+  Serial.println(abs(currentDegree - degree));
+  if(isNewDegree(degree)) {
     uncheckedWrite(degree);
   }
 }
@@ -43,22 +24,14 @@ void ServoGroup::write(int degree) {
  * @param degree
 */
 void ServoGroup::uncheckedWrite(int degree) {
-  checkActiveServos();
-
-  oldDegree = currentDegree;
   currentDegree = degree;
-
-  for(int i = 0; i < numberOfActiveSertvos; i++) {
-    servos[activeServoIndices[i]]->write(currentDegree);
+  for(int i = 0; i < COUNT_SERVOS; i++) {
+    servos[i]->write(currentDegree);
   }
 }
 
 // private //
 
-bool ServoGroup::isNewDegree() {
-  return abs(currentDegree - oldDegree) >= DEGREE_OFFSET;
-}
-
-void ServoGroup::checkActiveServos() {
-  
+bool ServoGroup::isNewDegree(int degree) {
+  return abs(currentDegree - degree) >= DEGREE_OFFSET;
 }

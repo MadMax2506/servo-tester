@@ -9,9 +9,9 @@
 | D3 | Servo auf -90° stellen | 
 | D4 | Servo auf 90° stellen | 
 | D5 | Manuel/Taster Modus toggeln | `LOW` = manueler-Modus
-| D7 | Servo 1 | 
-| D8 | Servo 2 | 
-| D9 | Servo 3 | 
+| D6 | Servo 1 | 
+| D7 | Servo 2 | 
+| D8 | Servo 3 | 
 | D10 | Servo 4 | 
 | D12 | Error-LED | 
 | A0 | Potentiometer | 

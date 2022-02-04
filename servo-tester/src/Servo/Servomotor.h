@@ -2,6 +2,7 @@
 #define _SERVOMOTOR_H_
 
 #include <Arduino.h>
+#include "../Utils/Utils.h"
 
 #define DEGREE_OFFSET 2
 
@@ -12,12 +13,8 @@
 class Servomotor {
   private:
     const int pin;
-
-    bool isActive();
   public:
     Servomotor(int);
-
-    int read();
     void write(int);
 };
 
