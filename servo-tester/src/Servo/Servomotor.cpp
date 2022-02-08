@@ -9,7 +9,6 @@ Servomotor::Servomotor(int pin) : pin(pin) {
  * @param degree
 */
 void Servomotor::write(int degree) {
-  // TODO: check code
   int pwm = (convertDegreeForServo(degree) * 11) + 500;
   digitalWrite(pin, HIGH);
   delayMicroseconds(pwm);

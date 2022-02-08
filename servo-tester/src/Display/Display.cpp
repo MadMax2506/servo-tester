@@ -18,6 +18,14 @@ void Display::setup() {
   output->clearDisplay();
   output->setTextSize(1);
   output->setTextColor(WHITE);
+
+  /**
+    0: portrait (tall)
+    1: landscape (wide)
+    2: portrait rotated 180°
+    3: landscape rotated 180°
+  */
+  output->setRotation(2);
 }
 
 /**
@@ -26,6 +34,7 @@ void Display::setup() {
 void Display::setModus(String modus) {
   output->print("Modus: ");
   output->println(modus);
+  output->println("");
 }
 
 /**
