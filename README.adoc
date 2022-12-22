@@ -13,6 +13,7 @@
 | D7 | Servo 2 | 
 | D8 | Servo 3 | 
 | D10 | Servo 4 | 
+| D11 | Digital/Analgo Servo Modus toggeln | `LOW` = digitaler Modus
 | D12 | Error-LED | 
 | A0 | Potentiometer | 
 | A4 | SDA | 
@@ -34,6 +35,7 @@ Degree-Offset: 5
 
 == libraries
 
+* Servo
 * Adafruit GFX
 * Adafruit SSD1306
 * Adafruit BusIO
