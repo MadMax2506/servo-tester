@@ -25,7 +25,13 @@ void setup() {
 
 void loop() {
   display->reset();
-  
+
+  const bool isAnalog = checkIfAnalogModus();
+  Serial.println(isAnalog ? "analog" : "digital");
+  if(isAnalog != servoGroup->getIsAnalog()) {
+    servoGroup->recreateServos(isAnalog);
+  }
+
   // check if it is a manuel modus
   if(checkIfManuelModus()) {
     // manuel modus

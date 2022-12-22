@@ -15,15 +15,21 @@
 class ServoGroup {
   private:
     int currentDegree;
+    bool isAnalog;
 
     Servomotor* servos[COUNT_SERVOS];
 
     bool isNewDegree(int);
+    Servomotor* buildServomotor(bool, int);
   public:
-    ServoGroup();
+    ServoGroup() : ServoGroup(false) {};
+    ServoGroup(bool);
+
+    bool getIsAnalog() const;
 
     void write(int);
     void uncheckedWrite(int);
+    void recreateServos(bool);
 };
 
 #endif //_SERVO_GROUP_H_

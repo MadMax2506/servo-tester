@@ -13,6 +13,10 @@ bool checkIfManuelModus() {
   return digitalRead(TOOGLE_MODI_PIN) == LOW;
 }
 
+bool checkIfAnalogModus() {
+  return digitalRead(TOOGLE_SERVO_MODI_PIN) == HIGH;
+}
+
 int getDegreeFromPoti() {
   int value = analogRead(POTI_PIN);
   if(value <= 444) {

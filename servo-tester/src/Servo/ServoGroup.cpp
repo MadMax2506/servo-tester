@@ -1,11 +1,11 @@
-#include "ServoGroup.h"
+#include "./ServoGroup.h"
 
-ServoGroup::ServoGroup(): currentDegree(0)  {
-  // define servos
-  servos[0] = new Servomotor(SERVO_ONE);
-  servos[1] = new Servomotor(SERVO_TWO);
-  servos[2] = new Servomotor(SERVO_THREE);
-  servos[3] = new Servomotor(SERVO_FOUR);
+ServoGroup::ServoGroup(bool isAnalog): currentDegree(0), isAnalog(isAnalog)  {
+  recreateServos(isAnalog);
+}
+
+bool ServoGroup::getIsAnalog() const {
+  return isAnalog;
 }
 
 /**
@@ -13,10 +13,7 @@ ServoGroup::ServoGroup(): currentDegree(0)  {
  * @param degree
 */
 void ServoGroup::write(int degree) {
-  Serial.println(abs(currentDegree - degree));
-  if(isNewDegree(degree)) {
-    uncheckedWrite(degree);
-  }
+  if(isNewDegree(degree)) uncheckedWrite(degree);
 }
 
 /**
@@ -25,13 +22,26 @@ void ServoGroup::write(int degree) {
 */
 void ServoGroup::uncheckedWrite(int degree) {
   currentDegree = degree;
-  for(int i = 0; i < COUNT_SERVOS; i++) {
-    servos[i]->write(currentDegree);
-  }
+  for(int i = 0; i < COUNT_SERVOS; i++) servos[i]->write(currentDegree);
+}
+
+void ServoGroup::recreateServos(bool isAnalog) {
+  ServoGroup::isAnalog = isAnalog;
+
+  // define servos
+  servos[0] = buildServomotor(isAnalog, SERVO_ONE);
+  servos[1] = buildServomotor(isAnalog, SERVO_TWO);
+  servos[2] = buildServomotor(isAnalog, SERVO_THREE);
+  servos[3] = buildServomotor(isAnalog, SERVO_FOUR);
 }
 
 // private //
 
 bool ServoGroup::isNewDegree(int degree) {
   return abs(currentDegree - degree) >= DEGREE_OFFSET;
+}
+
+Servomotor* ServoGroup::buildServomotor(bool isAnalog, int pin) {
+  if(isAnalog) return new AnalogServomotor(pin);
+  return new DigitalServomotor(pin);
 }

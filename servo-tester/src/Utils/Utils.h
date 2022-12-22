@@ -7,6 +7,7 @@
 #define POTI_PIN A0
 #define ERROR_LED_PIN 12
 #define TOOGLE_MODI_PIN 5
+#define TOOGLE_SERVO_MODI_PIN 11
 
 #define MANUEL_MODUS "Manuel"
 #define TASTER_MODUS "Taster"
@@ -14,6 +15,7 @@
 void definePinModes();
 void setErrorLed();
 bool checkIfManuelModus();
+bool checkIfAnalogModus();
 int getDegreeFromPoti();
 int convertDegreeForServo(int);
 
