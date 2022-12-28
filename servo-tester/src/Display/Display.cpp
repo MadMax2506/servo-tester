@@ -54,22 +54,6 @@ void Display::setLastTaster(String lastTaster) {
   output->println(lastTaster);
 }
 
-/**
- * display a waiting text for the servo
- */
-void Display::waitForServo() {
-  output->println("Keinen Servo an den");
-  output->print("Pins D");
-  output->print(SERVO_ONE);
-  output->print(", D");
-  output->print(SERVO_TWO);
-  output->print(", D");
-  output->print(SERVO_THREE);
-  output->println(" oder");
-  output->print("D");
-  output->print(SERVO_FOUR);
-  output->println(" angeschlossen");
-}
 
 /**
  * show the content on the display
